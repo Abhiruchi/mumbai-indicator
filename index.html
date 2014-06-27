@@ -1,0 +1,141 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" href="jquery.mobile-1.3.1.min.css" /> 
+<script src="jquery-1.7.1.min.js"></script>
+<script src="jquery.mobile-1.3.1.min.js"></script>
+<script src="app.js"></script>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<title>MUMBAI-INDICATOR</title>
+</head>
+<body>
+
+<div data-role="page" id="home">
+ <div data-role="header">
+<h6>Mumbai <br/>Indicator</h6>
+</div><!-- /header -->
+ 
+<div data-role="content">
+
+<a href="#" id="btnCentral" data-role="button">Central</a>
+<a href="#" id="btnRailMap" data-role="button">Rail Map</a>
+<a href="#" id="btnRailCodes" data-role="button">Rail Codes</a>
+
+</div><!-- /content -->
+</div>
+
+<div data-role="page" id="newPageId1" data-add-back-btn="true">
+<div data-role=header>
+<h1>Details</h1>
+</div> 
+ 
+<div id="newPageId">
+</div> 
+<div id="newPageId2">
+</div>  
+<div id="newPageId3">
+</div> 
+<div id="newPageId4">
+</div> 
+<div id="newPageId5">
+</div> 
+<div id="newPageId6">
+</div>
+<div id="newPageId6">
+CST
+</div>     
+
+</div>
+
+
+<div data-role="page" id="view_stations_dec" data-add-back-btn="true" style="background: url(images/back1.jpg);background-size: 1000px 800px; background-repeat: no-repeat;">
+ 
+<div data-role=header>
+
+<h6>
+You Are At ? </h6>
+
+</div>
+ <article class="underline"> 
+ 
+<ul data-role="listview" data-filter="true" id="note-list">
+</ul>
+</article>
+</div> 
+
+<div data-role="page" id="view_stations_inc" data-add-back-btn="true" style="background: url(images/back1.jpg);background-size: 1000px 800px; background-repeat: no-repeat;">
+ 
+<div data-role=header>
+
+<h6> You Are At? </h6>
+
+</div>
+
+<article class="underline"> 
+<ul data-role="listview" data-filter="true" id="note">
+</ul>
+</article>
+</div> 
+
+<div data-role="page" id="select_station" data-add-back-btn="true"  style="background: url(images/back1.jpg);background-size: 1000px 800px; background-repeat: no-repeat;">
+<center>
+      
+	 
+            <div data-role=header>
+<h6>Select </br> Destination</h6>
+</div>
+               
+		<nav class="vertical menu">
+                 <h2> MUMBAI CST </h2> </br>
+				 <input type="image"  id="btnViewStations_inc" src="images/arrow.png "  /> </br>
+                 <input type="image"  src="images/track.png "  /> </br>
+                 <input type="image"  id="btnViewStations_dec" src="images/arrowdown.png "  />  </br></br>
+				  <h2> KARJAT </h2>
+            
+        </nav> 
+				 
+	</center> 
+
+</div> 
+
+
+<div data-role="page" id="rail_codes" data-add-back-btn="true" style="background: url(images/back1.jpg);background-size: 1000px 800px; background-repeat: no-repeat;">
+ 
+<div data-role=header>
+<h6>List of Stations</h6>
+</div>
+ <div>
+<ul data-role="listview" data-filter="true">
+
+
+
+<li>A - AMBERNATH</li>
+<li>BL - BADLAPUR</li>
+<li>C - KURLA </li>
+<li>D - DADAR </li>
+<li>DI - DOMBIVLI </li>
+<li>G - GHATKOPAR </li>
+<li>K - KALYAN </li>
+<li>S - KARJAT</li>
+<li>ST - MUMBAI CST</li>
+<li>T - THANE</li>
+</ul>
+</div>
+</div> 
+
+
+<div data-role="page" id="map_rail" data-add-back-btn="true" >
+<div data-role=header>
+<h6>Central Map</h6>
+</div>
+<div>
+<center>
+<img src="/images/map.jpg"/ width="auto"> 
+</center>
+</div>
+</div>
+</body>
+</html>

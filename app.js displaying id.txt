@@ -1,0 +1,251 @@
+// variable which will hold the database connection
+var db;
+
+function initializeDB() {
+	if (window.indexedDB) {
+	  console.log("IndexedDB support is there");
+	}
+	else {
+	   alert("Indexed DB is not supported. Where are you trying to run this ? ");
+	}
+ 
+	// open the database
+	// 1st parameter : Database name. We are using the name 'student'
+	// 2nd parameter is the version of the database.
+	var request = indexedDB.open('m_indicator', 1);
+	
+	request.onsuccess = function (e) {
+	  // e.target.result has the connection to the database
+	  db = e.target.result;
+	  //Alternately, if you want - you can retrieve all the items
+	}
+	 
+	request.onerror = function (e) {
+	   console.log(e);
+	};
+	 
+	// this will fire when the version of the database changes
+	// We can only create Object stores in a versionchange transaction.
+	request.onupgradeneeded = function (e) {
+	   // e.target.result holds the connection to database
+	   db = e.target.result;
+	   
+	   if (db.objectStoreNames.contains("train_details")) {
+	     db.deleteObjectStore("train_details");
+	   }
+		
+	    const customerData = [
+		{ id: "00_01", name: "Karjat", flag: "1"},
+		{ id: "00_02", name: "Bhivpuri road", flag: ""},
+		{ id: "00_03", name: "Neral", flag: "" },
+		{ id: "00_04", name: "Shelu", flag: ""},
+		{ id: "00_05", name: "Vangali", flag: ""},
+		{ id: "00_06", name: "Badlapur", flag: "1"},
+		{ id: "00_07", name: "Ambernath", flag: "1"},
+		{ id: "00_08", name: "Ulhas Nagar", flag: ""},
+		{ id: "00_09", name: "Vuthalwadi", flag: ""},
+		{ id: "00_10", name: "Kalyan", flag: "1"},
+		{ id: "00_11", name: "Thakurali", flag: ""},
+		{ id: "00_12", name: "Dombivili", flag: "1"},
+		{ id: "00_13", name: "kopar", flag: ""},
+		{ id: "00_14", name: "Diva JN", flag: ""},
+		{ id: "00_15", name: "Mumbra", flag: ""},
+		{ id: "00_16", name: "Kalva", flag: ""},
+		{ id: "00_17", name: "Thane", flag: "1"},
+		{ id: "00_18", name: "Mulund", flag: ""},
+		{ id: "00_19", name: "Nahur", flag: ""},
+		{ id: "00_20", name: "Bhandup", flag: ""},
+		{ id: "00_21", name: "Kanjur Marg", flag: ""},
+		{ id: "00_22", name: "Vikhroli", flag: ""},
+		{ id: "00_23", name: "Ghatkopar", flag: "1"},
+		{ id: "00_24", name: "Vidyavihar", flag: ""},
+		{ id: "00_25", name: "Kurla", flag: "1"},
+		{ id: "00_26", name: "Sion", flag: ""},
+		{ id: "00_27", name: "Matunga", flag: ""},
+		{ id: "00_28", name: "Dadar", flag: "1"},
+		{ id: "00_29", name: "Parel", flag: ""},
+		{ id: "00_30", name: "Currey Road", flag: ""},
+		{ id: "00_31", name: "Chinchpokli", flag: ""},
+		{ id: "00_32", name: "Byculla", flag: "1"},
+		{ id: "00_33", name: "Sandhurst Road", flag: ""},
+		{ id: "00_34", name: "Masjid", flag: ""},
+		{ id: "00_35", name: "CST", flag: "1"},
+		];	
+	   // create a store named 'notes'
+	   // 1st parameter is the store name
+	   // 2nd parameter is the key field that we can specify here. Here we have opted for autoIncrement but it could be your
+	   // own provided value also.
+	   var objectStore = db.createObjectStore('train_details', { keyPath: 'id'});
+	   
+	   for (var i in customerData) {
+                objectStore.add(customerData[i]);      
+       }
+		
+	   console.log("Object Store has been created");
+	};
+}
+
+
+$(document).ready(function(){
+ 
+initializeDB();
+
+$("#btnViewStations_dec").click(function(){
+
+$.mobile.changePage ($("#view_stations_dec"));
+
+ var transaction = db.transaction(["train_details"]);
+ 
+ var objectStore = transaction.objectStore("train_details");
+ 
+var array = new Array();
+var id=new Array();
+var i = 0;
+
+objectStore.openCursor().onsuccess = function(event) {
+var cursor = event.target.result;
+
+if (cursor) {
+	var value = cursor.value;
+	var h3name = value.name;
+	var idd=value.id;
+	array.push(h3name);
+	id.push(idd);
+	//alert(array[i]);
+	i = i + 1;
+	cursor.continue();
+}
+
+
+$('div[data-role=collapsible]').collapsible({refresh:true});
+
+};
+
+alert("Choose station");
+
+for (j = 34; j >= 0; j--) {
+	
+	var noteElement = $("<div data-role='collapsible' data-theme='a' data-content-theme='a'>");
+	var h3name = array[j];
+	var temp=id[j];
+	var a = document.createElement("a");
+	a.textContent=array[j];
+	a.id=temp;
+
+	
+	noteElement.append(a);
+	//noteElement.append(pn);
+	
+
+	$("#note-list").append(noteElement);
+	
+	a.addEventListener("click", function(e) {
+		alert(this.id);
+  });
+}       
+
+
+
+});
+
+
+$("#btnViewStations_inc").click(function(){
+
+$.mobile.changePage ($("#view_stations_inc"));
+
+ var transaction = db.transaction(["train_details"]);
+ 
+ var objectStore = transaction.objectStore("train_details");
+ 
+var array = new Array();
+var id=new Array();
+var i = 0;
+
+objectStore.openCursor().onsuccess = function(event) {
+var cursor = event.target.result;
+
+if (cursor) {
+	var value = cursor.value;
+	var h3name = value.name;
+	var idd=value.id;
+	
+	array.push(h3name);
+	id.push(idd);
+	//alert(id[i]);
+	i = i + 1;
+	cursor.continue();
+}
+
+
+$('div[data-role=collapsible]').collapsible({refresh:true});
+
+};
+
+alert("Choose station");
+
+for (j = 0; j <= 34; j++) {
+	
+	var noteElement = $("<div data-role='collapsible' data-theme='a' data-content-theme='a'>");
+	
+	var h3name =array[j];
+	var temp=id[j];
+
+	
+	var a = document.createElement("a");
+	a.textContent=array[j];
+	a.id=temp;
+	
+	noteElement.append(a);
+
+	a.addEventListener("click", function(e) {
+	 alert(this.id);
+		
+  });	
+
+	
+	$("#note").append(noteElement);
+}       
+
+
+
+});
+
+/*$("#btnViewStations_inc").click(function(){
+$.mobile.changePage ($("#view_stations_inc"));
+
+$("#note-list2").html("");
+alert("here");
+var transaction2 = db.transaction([ 'train_details' ]);
+var store = transaction2.objectStore('train_details');
+ 
+store.openCursor().onsuccess = function (event) {
+var cursor2 = event.target.result;
+if (cursor2) {
+var value2 = cursor2.value;
+var noteElement = $("<div data-role='collapsible' data-theme='a' data-content-theme='a'>");
+
+var name = value2.name;
+
+noteElement.append(name);
+
+$("#note-list2").append(noteElement);
+ 
+// move to the next item in the cursor
+cursor2.continue();
+} else {
+    alert("No more entries!");
+  }
+$('div[data-role=collapsible]').collapsible({refresh:true});
+};
+});*/
+
+
+
+$("#btnCentral").click(function(){
+$.mobile.changePage ($("#select_station"));
+});
+
+
+
+});
+

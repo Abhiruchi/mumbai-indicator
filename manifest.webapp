@@ -1,0 +1,16 @@
+{
+  "name": "m-indicator",
+  "description": "Train schedule",
+  "version": "1.0",
+  "launch_path": "/index.html",
+  "developer": {
+    "name": "Abhiruchi  Gupta, Anushree Garg, Jyoti, Preeti Wadhwani"
+  },
+  "icons": {
+	"128": "/images/logo-128.png"
+  },
+  "installs_allowed_from": [
+    "*"
+  ],
+  "default_locale": "en"
+}
